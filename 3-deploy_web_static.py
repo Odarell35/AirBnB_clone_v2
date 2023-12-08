@@ -6,6 +6,7 @@ from fabric.api import local, task, env, put, run
 
 env.hosts = ['100.26.247.248', '52.91.120.195']
 
+
 @task
 def do_pack():
     """creating an archive"""
@@ -18,6 +19,8 @@ def do_pack():
     tgz_arc = local(f"tar -cvzf versions/{arc} web_static")
     if tgz_arc.succeeded:
         return arc
+
+
 @task
 def do_deploy(archive_path):
     """distributes an archive to your web servers"""
@@ -30,16 +33,21 @@ def do_deploy(archive_path):
 
         put(archive_path, '/tmp/')
         run(f"mkdir -p /data/web_static/releases/{archive_no_ext}")
-        run(f"tar -xzf /tmp/{archive_name} -C /data/web_static/releases/{archive_no_ext}/")
+        run(f"tar -xzf /tmp/{archive_name} -C\
+            /data/web_static/releases/{archive_no_ext}/")
         run(f"rm /tmp/{archive_name}")
-        run(f"mv /data/web_static/releases/{archive_no_ext}/web_static/* /data/web_static/releases/{archive_no_ext}/")
+        run(f"mv /data/web_static/releases/{archive_no_ext}/web_static/*\
+            /data/web_static/releases/{archive_no_ext}/")
         run(f"rm -rf /data/web_static/releases/{archive_no_ext}/web_static")
         run(f"rm -rf /data/web_static/current")
-        run(f"ln -s /data/web_static/releases/{archive_no_ext}/ /data/web_static/current")
-
+        run(f"ln -s /data/web_static/releases/{archive_no_ext}/\
+            /data/web_static/current")
+        print("New version deployed!")
         return True
     except Exception as e:
         print(e)
+
+
 @task
 def deploy():
     """ creates and distributes an archive to your web servers"""
