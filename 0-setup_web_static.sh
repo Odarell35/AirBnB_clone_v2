@@ -7,7 +7,13 @@ sudo apt-get install -y nginx
 #create folders
 mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
-echo "Holberton School" > /data/web_static/releases/test/index.html
+echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" > /data/web_static/releases/test/index.html
 
 #create symbolic link
 ln -sf /data/web_static/releases/test/ /data/web_static/current
