@@ -23,8 +23,8 @@ chown -R ubuntu /data/
 chgrp -R ubuntu /data/
 
 #config nginx
-replace="add_header X-Served-By $hostname;\n\tlocation \/hbnb_static {\n\talias \/data\/web_static\/current;\n\tindex index.html index.htm;\n\t}"
-sudo sed -i "s/add_header X-Served-By $hostname;/$replace/" /etc/nginx/sites-enabled/default
+replace="server_name _;\n\tlocation \/hbnb_static {\n\talias \/data\/web_static\/current;\n\tindex index.html index.htm;\n\t}"
+sudo sed -i "s/server_name _;/$replace/" /etc/nginx/sites-enabled/default
 
 #restart nginx
 sudo service nginx restart
