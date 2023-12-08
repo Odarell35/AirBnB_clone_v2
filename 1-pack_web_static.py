@@ -17,4 +17,3 @@ def do_pack():
     tgz_arc = local(f"tar -cvzf versions/{arc} web_static")
     if tgz_arc.succeeded:
         return arc
-
