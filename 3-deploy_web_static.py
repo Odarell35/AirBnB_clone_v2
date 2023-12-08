@@ -19,6 +19,7 @@ def do_pack():
     tgz_arc = local(f"tar -cvzf versions/{arc} web_static")
     if tgz_arc.succeeded:
         return arc
+    return None
 
 
 @task
@@ -32,6 +33,7 @@ def do_deploy(archive_path):
         archive_no_ext = archive_name.split('.')[0]
 
         put(archive_path, '/tmp/')
+        run(f"rm -rf /data/web_static/releases/{archive_no_ext}")
         run(f"mkdir -p /data/web_static/releases/{archive_no_ext}")
         run(f"tar -xzf /tmp/{archive_name} -C\
             /data/web_static/releases/{archive_no_ext}/")
