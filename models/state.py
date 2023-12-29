@@ -20,8 +20,9 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             """ getter """
+            from models import storage
             city_list = []
-            city_intances = storage.all(City)
+            city_instances = storage.all(City)
             for i in city_instances.values():
                 if i.state_id == self.id:
                     city_list.append(i)
