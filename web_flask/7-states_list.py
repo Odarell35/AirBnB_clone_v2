@@ -9,7 +9,7 @@ from models import storage
 app = Flask(__name__)
 
 
-@app.route('/state_list', strict_slashes=False)
+@app.route('/states_list', strict_slashes=False)
 def list_state():
     """display state list"""
     states = storage.all(State)
