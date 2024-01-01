@@ -29,5 +29,11 @@ def detail_state(id):
     return render_template('not_found.html')
 
 
+@app.teardown_appcontext
+def close(self):
+    """ Method to close the session """
+    storage.close()
+
+
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000)
