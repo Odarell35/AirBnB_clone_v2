@@ -11,7 +11,7 @@ def list_state():
     """display state list"""
     states = storage.all(State)
     states_list = sorted(states.values(), key=lambda state: state.name)
-    return render_template('states_list.html', states_list=states_list)
+    return render_template('9-states.html', states_list=states_list, mode='all)
 
 
 @app.route('/states/<id>', strict_slashes=False)
@@ -24,9 +24,9 @@ def detail_state(id):
         cities = sorted(states.cities, key=lambda x: x.name)
         return render_template('9-states.html', states=state, cities=cities, mode='id')
       else:
-        return render_template('not_found.html')
+        return render_template('9-states.html', states=state, cities=cities, mode='none')
   else:
-    return render_template('not_found.html')
+    return render_template('9-states.html', states=state, cities=cities, mode='none)
 
 
 @app.teardown_appcontext
