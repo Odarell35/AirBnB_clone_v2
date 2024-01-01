@@ -2,8 +2,6 @@
 """Flask web application"""
 
 from flask import Flask, url_for, render_template
-from markupsafe import escape
-from models import *
 from models.state import State
 from models import storage
 app = Flask(__name__)
