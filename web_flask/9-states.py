@@ -18,7 +18,7 @@ def list_state():
 def detail_state(id):
   """diplays state by id"""
   if id is not None:
-    states = storage.all(State).values()
+    states = storage.all(State, id).values()
     for state in states:
       if state.id == id:
         cities = sorted(states.cities, key=lambda x: x.name)
