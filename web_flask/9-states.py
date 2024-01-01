@@ -17,7 +17,7 @@ def list_state():
 @app.route('/states/<id>', strict_slashes=False)
 def detail_state(id):
   """diplays state by id"""
-  if id is not none:
+  if id is not None:
     states = storage.all(State).values()
     for state in states:
       if state.id == id:
